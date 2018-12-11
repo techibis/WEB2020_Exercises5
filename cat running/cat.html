@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Tuna</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* All cats have the same dimensions and the same sprite for a background image. */
+
+    .cat {
+      background: url(sprites/cat_sprite.png) -800px 0 no-repeat;
+      height: 200px;
+      width: 400px;
+      display: inline-block;
+    }
+
+    body {
+      background: #e5e6e9;
+      color: #071933;
+      font-family: 'Lato', sans-serif;
+      font-size: 1em;
+      line-height: 1.5em;
+      text-align: center;
+      width: 100%;
+      margin: 4em auto;
+    }
+
+    h1 {
+      font-family: 'Aleo', sans-serif;
+      font-weight: 400;
+      font-size: 1.5em;
+      line-height: 1.25em;
+      display: inline-block;
+      margin-right: 1em;
+    }
+
+    button {
+      background: #2d0d3c;
+      border: 0;
+      color: #f7e6ff;
+      cursor: pointer;
+      font-size: .9em;
+      padding: .7em 2em;
+    }
+  </style>
+</head>
+
+<body>
+  <button onclick="speedAnimations()">Speed things up</button>
+  <button onclick="slowAnimations()">Slow things down</button>
+
+  <div id="WAAPICats">
+    <div class="cat" id="withWAAPI"></div>
+  </div>
+
+  <script>
+    // Here we set up a keyframes object containing values set in an '@keyframes' CSS rule
+      var keyframes = [
+        { backgroundPosition: "-800px 0" },
+        { backgroundPosition: "-800px -2591px" }
+      ];
+      // and a timing object, which contains values we'd normally put in the 'animation' CSS rule
+      var timing = {
+        duration: 750,
+        iterations: Infinity,
+        easing: "steps(13, end)"
+      };
+
+      /* with the WAAPI's animate function, we apply both keyframes and timing objects to .cat#withWAAPI 
+      (Have a look in your DOM inspector!)*/
+      var catRunning = document.getElementById("withWAAPI").animate(keyframes, timing);
+      var slowen = .5;
+      var speeden = 2;
+
+      function slowAnimations() {
+        var currentSpeed = catRunning.playbackRate;
+        catRunning.playbackRate = currentSpeed * slowen;
+      }
+
+      function speedAnimations() {
+        var currentSpeed = catRunning.playbackRate;
+        catRunning.playbackRate = currentSpeed * speeden;
+      }
+  </script>
+</body>
+
+</html>
